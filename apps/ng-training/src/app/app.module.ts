@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -15,6 +15,9 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRadioModule } from '@angular/material/radio';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -40,9 +43,36 @@ import { FlexboxLinksComponent } from './flexbox/flexbox-links/flexbox-links.com
 import { Rxjs3Component } from './rxjs/rxjs3/rxjs3.component';
 import { Rxjs4Component } from './rxjs/rxjs4/rxjs4.component';
 import { RxjsLinksComponent } from './rxjs/rxjs-links/rxjs-links.component';
+import { PipeDemoComponent } from './pipes/pipe-demo/pipe-demo.component';
+import { Pipe1Component } from './pipes/pipe1/pipe1.component';
+import { Pipe2Component } from './pipes/pipe2/pipe2.component';
+import { PipeLinksComponent } from './pipes/pipe-links/pipe-links.component';
+import { I18nDemoComponent } from './i18n/i18n-demo/i18n-demo.component';
+import { I18n1Component } from './i18n/i18n1/i18n1.component';
+import { I18n2Component } from './i18n/i18n2/i18n2.component';
+import { I18nLinksComponent } from './i18n/i18n-links/i18n-links.component';
+
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { NgTrainingService } from './services/ng-training.service';
+import { HighlightPipe } from './pipes/highlight.pipe';
+import { TestingDemoComponent } from './testing/testing-demo/testing-demo.component';
+import { Testing1Component } from './testing/testing1/testing1.component';
+import { TestingLinksComponent } from './testing/testing-links/testing-links.component';
+import { Testing2Component } from './testing/testing2/testing2.component';
+import { Pipe3Component } from './pipes/pipe3/pipe3.component';
+import { FilterPipe } from './pipes/filter.pipe';
+
+export function translateHttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
-  declarations: [AppComponent, ShellComponent, HomeComponent, AnimationDemoComponent, TabsContainerComponent, Example1Component, Example2Component, Example3Component, FlexboxDemoComponent, Flexbox1Component, Flexbox2Component, CardComponent, RxjsDemoComponent, Rxjs1Component, Rxjs2Component, Example4Component, Flexbox3Component, AnimationLinksComponent, FlexboxLinksComponent, Rxjs3Component, Rxjs4Component, RxjsLinksComponent],
+  declarations: [AppComponent, ShellComponent, HomeComponent, AnimationDemoComponent, TabsContainerComponent, Example1Component, Example2Component, Example3Component, FlexboxDemoComponent, Flexbox1Component, Flexbox2Component, CardComponent, RxjsDemoComponent, Rxjs1Component, Rxjs2Component, Example4Component, Flexbox3Component, AnimationLinksComponent, FlexboxLinksComponent, Rxjs3Component, Rxjs4Component, RxjsLinksComponent, PipeDemoComponent, Pipe1Component, Pipe2Component, PipeLinksComponent, I18nDemoComponent, I18n1Component, I18n2Component, I18nLinksComponent, HighlightPipe, TestingDemoComponent, Testing1Component, TestingLinksComponent, Testing2Component, Pipe3Component, FilterPipe],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -60,10 +90,17 @@ import { RxjsLinksComponent } from './rxjs/rxjs-links/rxjs-links.component';
     MatRadioModule,
     MatTabsModule,
     MatToolbarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: translateHttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
-  providers: [],
-  schemas: [ NO_ERRORS_SCHEMA ],
+  providers: [NgTrainingService],
+  schemas: [NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

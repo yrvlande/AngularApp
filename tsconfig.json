@@ -15,7 +15,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@fis/customers": ["libs/customers/src/index.ts"]
+    }
+  },
+  "angularCompilerOptions": {
+    // "enableIvy": false
   },
   "exclude": ["node_modules", "tmp"]
 }
