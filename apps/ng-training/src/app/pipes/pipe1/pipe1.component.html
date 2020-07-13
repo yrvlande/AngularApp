@@ -1,0 +1,130 @@
+<mat-card>
+  <mat-card-title>Text-based Pipes</mat-card-title>
+  <mat-card-content>
+    <p><b>String:</b> {{text}}</p>
+    <p>Uppercase Pipe: {{text | uppercase}}</p>
+    <p>Lowercase Pipe: {{text | lowercase}}</p>
+    <p>Titlecase Pipe: {{text | titlecase}}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Number-based Pipes</mat-card-title>
+  <mat-card-content>
+    <p>This is a small number: {{smallNumber}}</p>
+    <p>Decimal Pipe: {{smallNumber | number}} (This is 3 decimal places by default)</p>
+    <p>Decimal Pipe at 4 decimal places: {{smallNumber | number:'1.4'}}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Percent Pipe</mat-card-title>
+  <mat-card-content>
+    <p>Number: {{percent}}</p>
+    <p>Percent Pipe: {{percent | percent}}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Currency Pipe</mat-card-title>
+  <mat-card-content>
+    <p>Number: {{money}}</p>
+    <p>Currency Pipe: {{money | currency}}</p>
+    <p>Canadian Currency: {{money | currency:'CAD'}}</p>
+    <p>Indian Currency: {{money | currency:'INR'}}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>JSON Pipe</mat-card-title>
+  <mat-card-content>
+    <pre>Object: {{data}}</pre>
+    <pre>Object with JsonPipe: {{data | json}}</pre>
+
+    <pre>array: {{array}}</pre>
+    <pre>array with pipe: {{array | json}}</pre>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Slice Pipe</mat-card-title>
+  <mat-card-content>
+    <p>Short String: {{shortString}}</p>
+    <p>Short String with Slice Pipe: {{shortString | slice: 0:2}}</p>
+
+    <p>Long string (Characters 10-19 inclusive): {{longString | slice: 10:20}}</p>
+    <p *ngIf='showLongString; else shortStringTemplate'>{{longString}}</p>
+
+    <ng-template #shortStringTemplate>
+      <p>{{longString | slice: 0: 50}}...</p>
+    </ng-template>
+
+    <button mat-raised-button
+      (click)="toggleLongString()">{{showLongString ? "Show Short String" : "Show Long String"}}</button>
+
+    <p>{{numbers | slice: 0: 4}}</p>
+    <p>{{numbers | slice: 0: 4 | json}}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Key Value Pipe</mat-card-title>
+  <mat-card-content>
+    <h4>Default Key-Value pipe</h4>
+    <p *ngFor="let item of person | keyvalue">
+      {{item.key}} - {{item.value}}
+    </p>
+
+    <h4>Custom Sort functions:</h4>
+    <h5>Sort by decreasing length of string values</h5>
+    <p *ngFor="let item of person | keyvalue:customCompareFn">
+      {{item.key}} - {{item.value}}
+    </p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Date Pipe</mat-card-title>
+  <mat-card-content>
+    <p>Date without Pipe: {{date}}</p>
+    <p>Date with Pipe: {{date | date}} </p>
+
+    <h3>Showing Dates</h3>
+    <p>Short Date: {{date | date:'shortDate'}}</p>
+    <p>Medium Date: {{date | date:'mediumDate'}}</p>
+    <p>Long Date: {{date | date:'longDate'}}</p>
+
+    <h3>Dates with Parameters</h3>
+    <p>dd/mm/yyyy: {{date | date:'d MMM y'}}</p>
+    <p>yyyy/mm/dd: {{date | date:'y MMM d'}}</p>
+
+    <h3>Formatting Times</h3>
+    <p>Short time: {{date | date:'shortTime'}}</p>
+    <p>Medium time: {{date | date:'mediumTime'}}</p>
+    <p>Long time: {{date | date:'longTime'}}</p>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>HTTP request without Pipes</mat-card-title>
+  <mat-card-content>
+    <div *ngIf='dataLoaded; else loading'>
+      <pre>{{character | json}}</pre>
+    </div>
+    <ng-template #loading>
+      <p>Getting data from Server...</p>
+    </ng-template>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>HTTP request with Pipe</mat-card-title>
+  <mat-card-content>
+    <div *ngIf='character$ | async as char1; else loading1'>
+      <pre>{{char1 | json}}</pre>
+    </div>
+    <ng-template #loading1>
+      <p>Loading using pipe...</p>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

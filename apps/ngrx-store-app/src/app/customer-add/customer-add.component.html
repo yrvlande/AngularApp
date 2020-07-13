@@ -1,0 +1,9 @@
+
+<mat-card>
+  <mat-form-field  style="width: 200px;">
+    <mat-label>Customer Name</mat-label>
+    <input matInput type="text" [(ngModel)]="value">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="addCustomer(value)">Add
+  </button>
+</mat-card>

@@ -1,0 +1,13 @@
+mat-card {
+  margin: 20px;
+  border: gray;
+  border-radius: 5px;
+}
+
+.mat-card-title {
+  font-size: 20px;
+}
+
+mat-card-content {
+  margin-top: 15px;
+}
